@@ -50,7 +50,7 @@ export const DetailContainer = (props) => {
             tmp.name = nameBaru
             console.log('baru',tmp.name)
             localStorage.setItem('pok', JSON.stringify(old.concat(tmp)));
-            // history.push("/pages/List");
+            history.push("/pages/List");
         }else{
             alert('bangsat ngabur')
         }
@@ -71,7 +71,13 @@ export const DetailContainer = (props) => {
     // console.log('data1',data && data.pokemon.types && data.pokemon.types.type && data.pokemon.types.type.name) 
     // console.log('gamabr',data?.pokemon?.types)
 
-    if(loading)return<p>loading data...</p>
+    if(loading)return(
+        <div className="d-flex justify-content-center">
+            <div className="spinner-grow fast text-info" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+        </div>
+        )
     
     // if(error)return<p>data gagal load.. {`Error: ${error_massage}`}</p>
 

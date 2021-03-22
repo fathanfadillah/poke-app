@@ -8,7 +8,13 @@ import {BrowserRouter as Router, Link , Route, Switch } from 'react-router-dom';
 import {ListContainer} from './pages/List'
 import {MyListContainer} from './pages/MyList'
 import {DetailContainer} from './pages/Detail';
+import {HomeContainer} from './pages/Home';
 import SidebarExampleDimmed from './pages/Navbar';
+import { MDBBtn, MDBIcon } from 'mdbreact';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbreact/dist/css/mdb.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 
 function App() {
@@ -19,30 +25,16 @@ function App() {
 
   return (
     <Router>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Pokemon</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <Link to={`/pages/List`}>List</Link>
-        </li>
-        <li class="nav-item">
-          <Link to={`/pages/MyList`}>my pokemon</Link>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand><Link to={`/`} style={{textDecoration: 'none'}} className="cyan-text"><MDBIcon fab icon="phoenix-squadron" /></Link></Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link><Link to={`/pages/List`}>List</Link></Nav.Link>
+          <Nav.Link><Link to={`/pages/MyList`}>My Pokemon</Link></Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
       {/* <ul>
         <li><Link to={`/pages/List`}>List</Link>
             
@@ -54,6 +46,7 @@ function App() {
       {/* <br></br> */}
       <div className="container mt-5">
         <ApolloProvider client={client}>
+              <Route exact path="/" component={HomeContainer}/>
               <Route path="/pages/List" component={ListContainer}/>
               <Route path="/pages/MyList" component={MyListContainer}/>
               <Route exact path="/pages/Detail/:PokemonName/" component={DetailContainer}/>

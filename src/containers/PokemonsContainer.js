@@ -1,16 +1,27 @@
-    import React, { useState } from 'react';
+    import React, { useState, Fragment } from 'react';
     import {useQuery} from '@apollo/react-hooks';
     import {GetPokemon} from '../graphql/get-pokemons';
     import {DetailContainer} from '../pages/Detail';
     import {BrowserRouter as Router, Link , Route } from 'react-router-dom'; 
     import { Button } from 'semantic-ui-react'
     import { useHistory } from "react-router-dom";
+    import { MDBBtn, MDBIcon, MDBContainer } from 'mdbreact';
+    import { MDBSpinner } from 'mdbreact';
+
 
     export const PokemonsContainer = (props) => {
         // const {data: {pokemons = []} ={} } = useQuery(GetPokemon);
         const {data: {pokemons = []} ={}, loading, error} = useQuery(GetPokemon);
         
-        if(loading)return <p>loading data....</p>
+        if(loading)return(
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border fast text-info" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        )
+    
+
         if(error)return <p>data gagal load.. {`Error: ${error_massage}`}</p>
         // if(data)return <p>data berhasil load..</p>
 
@@ -36,27 +47,24 @@
                     (
                         
                             <div class="col-md-4">
-                                <div key={index} class="card w-75 my-5">
+                                <div key={index} class="card w-75 my-5 bg-dark border border-5 rounded-3" style={{borderRadius: 20 + 'px'}}>
                                     {/* <img src={pokemon.image} width="100" height="100"></img> */}
                                     <img src={pokemon.image} class="card-img-top h-50" alt="Card image cap"/>
                                     <div class="card-body border">
                                         {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
                                         <div class="row">
                                             <div class="col">
-                                                <p>{pokemon.name}</p>
+                                                <p className="text-capitalize text-info">{pokemon.name}</p>
                                             </div>
-                                            <div class="col float-right">
+                                            <div class="col">
                                                 <Router>
-                                                    <button type="button" class="btn btn-primary"
-                                                        onClick={() => handleClick(pokemon.name)}>
-                                                            {/* <span class="text-white"> */}
-                                                                <Link to={`/pages/Detail/${pokemon.name}`}>
-                                                                    <span class="text-white">
-                                                                        Detail
-                                                                    </span>
-                                                                </Link>
-                                                            {/* </span> */}
-                                                    </button>
+                                                    <span className="d-flex justify-content-end">
+                                                        <Fragment>
+                                                            <Link to={`/pages/Detail/${pokemon.name}`} onClick={() => handleClick(pokemon.name)}>
+                                                                    <MDBIcon far icon="hand-rock" color="danger"/>
+                                                            </Link>    
+                                                        </Fragment>
+                                                    </span>
                                                 </Router>
                                             </div>
                                         </div>
