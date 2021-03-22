@@ -1,4 +1,4 @@
-import {React, useState, setState} from 'react';
+import React, {useState, setState, Fragment } from 'react';
 import PokemonsContainer  from '../containers/PokemonsContainer';
 import {useQuery} from '@apollo/react-hooks';
 import {GetMoves} from '../graphql/get-pokemons';
@@ -6,6 +6,9 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from "@apollo/client";
 import { graphql } from 'react-apollo';
 import { useHistory } from "react-router-dom";
+import { Card, Icon, Image } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
+import { MDBBtn } from "mdbreact";
 
 export const DetailContainer = (props) => {
     console.log('isi pokemon: ', props)
@@ -16,7 +19,7 @@ export const DetailContainer = (props) => {
     const {data, loading, error } = useQuery(GetMoves, {
         variables: { name : Name},
     });
-
+    console.log('data',data)
     // function ()
     const [local, setLocal] = useState()
 
@@ -28,7 +31,7 @@ export const DetailContainer = (props) => {
         var rand = Math.random() < 0.5;
         console.log(rand)
         if(rand){
-            alert('yes dapet')
+            alert('Selamat Anda Berhasil')
             var nameBaru = prompt()
 
             var old = JSON.parse(localStorage.getItem('pok'));
@@ -52,7 +55,7 @@ export const DetailContainer = (props) => {
             localStorage.setItem('pok', JSON.stringify(old.concat(tmp)));
             history.push("/pages/List");
         }else{
-            alert('bangsat ngabur')
+            alert('Anda Kurang Beruntung')
         }
 
                            // key                       //concat dengan 
@@ -84,22 +87,44 @@ export const DetailContainer = (props) => {
     return (
         <div>
             <div>
-                   {Name} <button onClick={() => addList(data?.pokemon)}>tangkepin</button> 
-                    <img src={data.pokemon.sprites.front_default} width="100" height="100" />
-                   Tipe:
-                   <br />-------------------
-                   {data?.pokemon?.types.map((x, y)=>
-                        <div key={y}>
-                            <span>{x.type.name}</span>
-                        </div>
-                   )}
-                   Moves:
-                   <br />-------------------
-                   {data?.pokemon?.moves?.map((x, y)=> 
-                        <div key={y}>
-                            <span>{x.move.name}</span>
-                        </div>
-                   ) }
+                   <Card className="border-5 rounded-5 border-dark w-50" style={{borderRadius: 20 + 'px'}}>
+                        <Image className="bg-dark" src={data.pokemon.sprites.front_default} wrapped ui={false} />
+                        <Card.Content className="bg-light">
+                            <Card.Header className="text-capitalize">
+                                <div classNane="row">
+                                    <span className="col">{Name}</span>
+                                    <span className="col d-flex justify-content-end">
+                                        <span className="mr-2">Tipe : </span>
+                                        <span className="">{data?.pokemon?.types.map((x, y)=>
+                                        // <span>Tipe :</span>
+                                        <div key={y}>
+                                            <span className="mr-2">{x.type.name} </span>
+                                        </div>
+                                    )}</span>
+                                    </span>
+                                </div>
+                            </Card.Header>
+                            {/* <Card.Meta>
+                                <span className='date'>Joined in 2015</span>
+                            </Card.Meta> */}
+                            <Card.Description>
+                                <div className="row d-flex justify-content-center">
+                                    {data?.pokemon?.moves?.map((x, y)=> 
+                                        <div key={y} className="col-md-3 m-2">
+                                            <span class="mr-2">{x.move.name}<br /></span>
+                                        </div>
+                                    )}
+                                </div>
+                            </Card.Description>
+                            </Card.Content>
+                        <Card.Content extra className="bg-dark">
+                                {/* <Icon name='user' /> */}
+                                {/* 22 Friends */}
+                            <Fragment>
+                            <MDBBtn  onClick={() => addList(data?.pokemon)} gradient="aqua">tangkepin</MDBBtn >
+                            </Fragment>
+                        </Card.Content>
+                    </Card>
             </div>
         </div>
     )

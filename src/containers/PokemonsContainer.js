@@ -7,6 +7,8 @@
     import { useHistory } from "react-router-dom";
     import { MDBBtn, MDBIcon, MDBContainer } from 'mdbreact';
     import { MDBSpinner } from 'mdbreact';
+    import { Popup, Card, Image, Rating } from 'semantic-ui-react'
+
 
 
     export const PokemonsContainer = (props) => {
@@ -45,7 +47,6 @@
             <div class="row">
                 {pokemons && pokemons.results && pokemons.results.map((pokemon, index) => 
                     (
-                        
                             <div class="col-md-4">
                                 <div key={index} class="card w-75 my-5 bg-dark border border-5 rounded-3" style={{borderRadius: 20 + 'px'}}>
                                     {/* <img src={pokemon.image} width="100" height="100"></img> */}
@@ -54,7 +55,18 @@
                                         {/* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> */}
                                         <div class="row">
                                             <div class="col">
-                                                <p className="text-capitalize text-info">{pokemon.name}</p>
+                                                <Popup
+                                                    trigger={
+                                                        <p className="text-capitalize text-white">{pokemon.name}</p>
+                                                    }
+                                                >
+                                                    <Popup.Header>Message</Popup.Header>
+                                                    <Popup.Content>
+                                                        Are you sure that you want catch this pokemon ? 
+                                                        <br /><br />
+                                                        Please click the right button 
+                                                    </Popup.Content>
+                                                </Popup>
                                             </div>
                                             <div class="col">
                                                 <Router>

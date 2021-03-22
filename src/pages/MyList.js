@@ -82,6 +82,7 @@ export const MyListContainer = () => {
         console.log('apus',apus)
         localStorage.setItem('pok',JSON.stringify(apus));
         setMyPok(apus)
+        alert('Goblok malah dibaung udah tau susah')
         // history.push("/pages/MyList");
         // setData([])
     }
