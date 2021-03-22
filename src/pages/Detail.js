@@ -56,7 +56,7 @@ export const DetailContainer = (props) => {
             tmp.name = nameBaru
             console.log('baru',tmp.name)
             localStorage.setItem('pok', JSON.stringify(old.concat(tmp)));
-            // history.push("/pages/List");
+            history.push("/pages/List");
         }else{
             alert('Anda Kurang Beruntung')
         }
