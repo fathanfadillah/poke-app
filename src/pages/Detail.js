@@ -45,6 +45,9 @@ export const DetailContainer = (props) => {
 
             } else {
                 list.id = old[old.length-1].id+1
+                            //ambil panjang array
+                            //dikurang 1 soalnya mau ambil index
+                                            //karna buat ambil id setelahnya makanya ditambah 
                 // list.id = old.id+1
                 // console.log('else',list.id)
             }
@@ -87,8 +90,8 @@ export const DetailContainer = (props) => {
     return (
         <div>
             <div>
-                   <Card className="border-5 rounded-5 border-dark w-50" style={{borderRadius: 20 + 'px'}}>
-                        <Image className="bg-dark" src={data.pokemon.sprites.front_default} wrapped ui={false} />
+                   <Card className="rounded-5 border-dark w-50">
+                        <Image className="bg-dark" src={data.pokemon.sprites.front_default}/>
                         <Card.Content className="bg-light">
                             <Card.Header className="text-capitalize">
                                 <div classNane="row">

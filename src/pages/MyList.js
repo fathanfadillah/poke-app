@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from "react-router-dom";
 // import ApolloClient from 'apollo-boost'; 
 // import { ApolloProvider } from "@apollo/client";
+import { Card, Icon, Image } from 'semantic-ui-react'
+import { MDBBtn } from "mdbreact";
 
 export const MyListContainer = () => {
     
@@ -52,24 +54,24 @@ export const MyListContainer = () => {
     // }
 
 
-//    function Load(){
-//        setIsLoading(true)
-        // let props = localStorage.getItem('pok');
-        // setMyPok(JSON.parse(localStorage.getItem('local')))
-        // console.log('m',myPok)
+    //    function Load(){
+    //        setIsLoading(true)
+            // let props = localStorage.getItem('pok');
+            // setMyPok(JSON.parse(localStorage.getItem('local')))
+            // console.log('m',myPok)
 
-        // console.log(props)
-        // props = JSON.parse(props)
-        // console.log('old',props)
-        // console.log('old',props.sprites.front_de)
-        // console.log('gambar',props.sprites.front_default)
-        // let history = useHistory();
-//    }
-// console.log(props)
+            // console.log(props)
+            // props = JSON.parse(props)
+            // console.log('old',props)
+            // console.log('old',props.sprites.front_de)
+            // console.log('gambar',props.sprites.front_default)
+            // let history = useHistory();
+    //    }
+    // console.log(props)
 
-    // useEffect(()=>{
-    //     Load()
-    // },[myPok, isLoading])
+        // useEffect(()=>{
+        //     Load()
+        // },[myPok, isLoading])
 
 
     function Buang(y){
@@ -102,19 +104,52 @@ export const MyListContainer = () => {
     //             console.log('')
     //         };
     //   })
+    console.log('gambar',myPok[0].types[0].type.name)
 
 
     return (
-        <div>
-            my list page
-            <br />-------------------
+        <div className="row">
             {myPok.map((x, y)=> 
-                        <div key={y}>
-                            <span>{y}:{x.name}  </span>
-                            <button onClick={() => Buang(x.id)}>Buang</button>
+                        <div className="col-md-4" key={y}>
+                            <Card>
+                                <Image src={x?.sprites?.front_default} className="bg-dark"/>
+                                <Card.Header>
+                                    <div className="row container">
+                                        <span className="col">
+                                            {x.name}
+                                        </span>
+                                        {/* {x[0]?.types?.type?.name} */}
+                                        
+                                        <span className="col d-flex just">
+                                            {/* {x?.types?.map((i,j)=>{
+                                                <span key={j}>
+                                                    {i}
+                                                </span>
+                                            })} */}
+                                        </span>
+                                            {/* {x?.moves?.map((i,j)=>{
+                                              <span key={j}>
+                                                    <span>{i?.move?.name}</span>
+                                                </span>
+                                            })} */}
+                                    </div>
+                                </Card.Header>
+                                <Card.Description>
+                                    
+                                </Card.Description>
+                                <Card.Content>
+                                    <Fragment>
+                                        <span className="d-flex justify-content-center">
+                                          <MDBBtn onClick={() => Buang(x.id)} gradient="aqua">Buang</MDBBtn>
+                                        </span>
+                                    </Fragment>
+                                </Card.Content>
+                            </Card>
+                            {/* <button onClick={() => Buang(x.id)}>Buang</button> */}
                             <br></br><br></br>
                         </div>
-                   ) || ''}
+                   )
+            }
             {/* {myPok?.map((x, y)=> 
                 <div key={y}>
                     <span>{y}:{x.name}  </span>
