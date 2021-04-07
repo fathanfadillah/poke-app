@@ -37,14 +37,14 @@ export const DetailContainer = (props) => {
             var old = JSON.parse(localStorage.getItem('pok'));
             console.log('o',old)
                                         
-            if(old.length == 0 || !old) {
+            if(old?.length == 0 || !old) {
                 old = [];
                 const id = 1
                 list.id = id
                 console.log('id',list.id)
 
             } else {
-                list.id = old[old.length-1].id+1
+                list.id = old[old?.length-1].id+1
                             //ambil panjang array
                             //dikurang 1 soalnya mau ambil index
                                             //karna buat ambil id setelahnya makanya ditambah 
